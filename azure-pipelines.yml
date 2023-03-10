@@ -12,7 +12,17 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerimage'
+    repository: 'us-central1-docker.pkg.dev/future-sunrise-380216/testing'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerimage'
+    repository: 'us-central1-docker.pkg.dev/future-sunrise-380216/testing'
+    command: 'push'
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
